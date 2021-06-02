@@ -1,28 +1,41 @@
 <template>
   <div id="app">
-    <img alt="Vue logo" src="./assets/logo.png">
-    <HelloWorld msg="Welcome to Your Vue.js App"/>
+    <TopNavigation />
+    <div id="content">
+      Hello World!
+    </div>
+    <BottomNavigation />
   </div>
 </template>
 
 <script>
-import HelloWorld from './components/HelloWorld.vue'
+import TopNavigation from './components/TopNavigation'
+import BottomNavigation from './components/BottomNavigation'
 
 export default {
   name: 'App',
   components: {
-    HelloWorld
+    TopNavigation,
+    BottomNavigation
   }
 }
 </script>
 
 <style>
 #app {
-  font-family: Avenir, Helvetica, Arial, sans-serif;
+  /*font-family: 'Avenir', Helvetica, Arial, sans-serif;*/
   -webkit-font-smoothing: antialiased;
   -moz-osx-font-smoothing: grayscale;
-  text-align: center;
   color: #2c3e50;
-  margin-top: 60px;
+  flex: 1;
+  display: flex;
+  flex-direction: column;
+  min-height: min-content;
+}
+#content {
+  flex-grow: 1;
+  flex-shrink: 0;
+  display: flex;
+  overflow: auto;
 }
 </style>

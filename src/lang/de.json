@@ -1,0 +1,79 @@
+{
+  "header": {
+    "applicationName": "Pool",
+    "organizationName": "Viva con Agua"
+  },
+  "nav": {
+    "labels": {
+      "screenreader": {
+        "toggle": "Ein Button zum Ausklappen des Menüs."
+      },
+      "footer": {
+        "termsOfUse": {
+          "label": "Nutzungsbedingungen",
+          "description": "Die Nutzungsbedingungen lesen"
+        },
+        "privacyStatement": {
+          "label": "Datenschutzerklärung",
+          "description": "Die Datenschutzerklärung lesen"
+        },
+        "imprint": {
+          "label": "Impressum",
+          "description": "Zum Impressum"
+        }
+      },
+      "header": {
+        "profile": "Profil",
+        "actions": "Aktionen",
+        "availableActions": "Verfügbare",
+        "myActions": "Meine Aktionen",
+        "availableCamps": "Regio-Camps",
+        "office": "Office",
+        "users": "Nutzer",
+        "crews": "Crews",
+        "actionManagement": "Aktionen",
+        "actionFestival": "Festivals",
+        "actionConcert": "Konzerte",
+        "actionMisc": "Sonstige",
+        "actionSlots": "Plätze & Teilnehmer",
+        "networkManagement": "Netzwerk",
+        "networkGatherings": "Netzwerktreffen",
+        "networkSlots": "Plätze & Teilnehmer",
+        "goldeimerManagement": "Goldeimer",
+        "goldeimerFestival": "Festivals",
+        "goldeimerSlots": "Plätze & Teilnehmer",
+        "emailManagement": "Emails",
+        "emailCompose": "Schreiben",
+        "emailOutbox": "Postausgang",
+        "emailSend": "Versandte Emails",
+        "financesManagement": "Finanzen",
+        "financesGeneral": "Übersicht",
+        "financesDonations": "Spenden",
+        "financesBanking": "Wirtschaftsgeld",
+        "financesSettings": "Einstellungen",
+        "admin": "Admin",
+        "oAuthClients": "OAuthClients verwalten",
+        "poolSettings": "Pool 1 Settings",
+        "poolMode": "Pool 1 Wartungsmodus",
+        "poolDeleteInactives": "Karteileichen aufräumen",
+        "faq": "FAQ",
+        "generalFAQ": "Allgemein",
+        "festivalFAQ": "Festival",
+        "goldeimerFAQ": "Goldeimer",
+        "poolFAQ": "Pool",
+        "signOut": "Rausloggen",
+        "signIn": "Reinloggen",
+        "signUp": "Mitmachen",
+        "household": "Haushalt",
+        "donations": "Spenden",
+        "wiki": "Wiki"
+      }
+    }
+  },
+  "error": {
+    "notFound": "Nichts gefunden",
+    "notAuthenticated": "Nicht eingeloggt",
+    "forbidden": "Keine Berechtigung",
+    "unknown": "Ein unbekannter Fehler ist aufgetreten"
+  }
+}

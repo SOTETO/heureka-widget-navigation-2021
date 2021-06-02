@@ -1,0 +1,79 @@
+{
+  "header": {
+    "applicationName": "Pool",
+    "organizationName": "Viva con Agua"
+  },
+  "nav": {
+    "labels": {
+      "screenreader": {
+        "toggle": "A button that shows the menue."
+      },
+      "footer": {
+        "termsOfUse": {
+          "label": "Terms of Use",
+          "description": "Read the terms of use"
+        },
+        "privacyStatement": {
+          "label": "Privacy Statement",
+          "description": "Read the privacy statement"
+        },
+        "imprint": {
+          "label": "Imprint",
+          "description": "Open imprint"
+        }
+      },
+      "header": {
+        "profile": "Profile",
+        "actions": "Actions",
+        "availableActions": "Available",
+        "myActions": "My actions",
+        "availableCamps": "Regional camps",
+        "office": "Office",
+        "users": "Users",
+        "crews": "Crews",
+        "actionManagement": "Actions",
+        "actionFestival": "Festivals",
+        "actionConcert": "Concerts",
+        "actionMisc": "Misc",
+        "actionSlots": "Slots",
+        "networkManagement": "Network",
+        "networkGatherings": "Network gatherings",
+        "networkSlots": "Slots",
+        "goldeimerManagement": "Goldeimer",
+        "goldeimerFestival": "Festivals",
+        "goldeimerSlots": "Slots",
+        "emailManagement": "Emails",
+        "emailCompose": "Compose",
+        "emailOutbox": "Outbox",
+        "emailSend": "Send",
+        "financesManagement": "Finances",
+        "financesGeneral": "Overview",
+        "financesDonations": "Donations",
+        "financesBanking": "Crew Banking",
+        "financesSettings": "Settings",
+        "admin": "Admin",
+        "oAuthClients": "OAuthClients",
+        "poolSettings": "Pool 1 settings",
+        "poolMode": "Pool 1 maintenance mode",
+        "poolDeleteInactives": "Remove inactives",
+        "faq": "FAQ",
+        "generalFAQ": "General",
+        "festivalFAQ": "Festival",
+        "goldeimerFAQ": "Goldeimer",
+        "poolFAQ": "Pool",
+        "signOut": "Sign out",
+        "signIn": "Sign in",
+        "signUp": "Sign up",
+        "household": "Household",
+        "donations": "Donations",
+        "wiki": "Wiki"
+      }
+    }
+  },
+  "error": {
+    "notFound": "Not Found",
+    "notAuthenticated": "Not Authenticated",
+    "forbidden": "Forbidden",
+    "unknown": "An unknown error occurred"
+  }
+}

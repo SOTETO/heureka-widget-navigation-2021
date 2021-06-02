@@ -1,7 +1,9 @@
 {
   "name": "heureka-widget-navigation-2021",
-  "version": "0.1.0",
+  "version": "0.2.15",
   "private": true,
+  "description": "Implements a widget showing the menu of the Pool², an instance of the Heureka! architecture.",
+  "author": "Johann Sell <sell@informatik.hu-berlin.de>",
   "scripts": {
     "serve": "vue-cli-service serve",
     "build": "vue-cli-service build",
@@ -9,7 +11,9 @@
   },
   "dependencies": {
     "core-js": "^3.6.5",
-    "vue": "^2.6.11"
+    "vue": "^2.6.11",
+    "axios": "^0.18.0",
+    "vue-i18n": "^8.1.0"
   },
   "devDependencies": {
     "@vue/cli-plugin-babel": "~4.5.0",
@@ -18,7 +22,9 @@
     "babel-eslint": "^10.1.0",
     "eslint": "^6.7.2",
     "eslint-plugin-vue": "^6.2.2",
-    "vue-template-compiler": "^2.6.11"
+    "vue-template-compiler": "^2.6.11",
+    "less": "^3.0.4",
+    "less-loader": "^4.1.0"
   },
   "eslintConfig": {
     "root": true,
@@ -38,5 +44,13 @@
     "> 1%",
     "last 2 versions",
     "not dead"
-  ]
+  ],
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/SOTETO/heureka-widget-navigation-2021"
+  },
+  "bugs": {
+    "url": "https://github.com/SOTETO/heureka-widget-navigation-2021/issues"
+  },
+  "homepage": "https://github.com/SOTETO/heureka-widget-navigation-2021#readme"
 }
