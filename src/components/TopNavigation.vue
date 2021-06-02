@@ -93,7 +93,7 @@ export default {
       })
     },
     getEntries: function () {
-      return this.entrys.filter((e) => typeof e.hasAccess === 'function' && e.hasAccess)
+      return this.entrys.filter((e) => Object.prototype.hasOwnProperty.call(e,"hasAccess") && e.hasAccess)
     },
     hasAccess: function (entry) {
       function compare(roleUser, roleRoute) {
