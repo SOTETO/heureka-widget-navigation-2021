@@ -11,7 +11,6 @@ export default class DropsEndpoints {
         )
             .then(response => successHandler(response.data.additional_information))
             .catch(error => {
-                console.log(error)
                 switch(error.response.status) {
                     case 401:
                         unauthorizedHandler(error)

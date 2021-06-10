@@ -18,7 +18,7 @@
       </div>
       <div class="navbar-collapse collapse" id="navbar-main">
         <ul class="nav navbar-nav navbar-right">
-          <MenuEntry v-for="entry in entries()" :key="entry.id" :entry="entry" type="button" :layer="0" :roles="roles" />
+          <MenuEntry v-for="entry in entries" :key="entry.id" :entry="entry" type="button" :layer="0" :roles="roles" />
         </ul>
         <ul v-if="errors && errors.length">
           <li v-for="error of errors" :key="error.id">
@@ -37,22 +37,14 @@ import MenuEntry from './MenuEntry'
 export default {
   name: 'TopNavigation',
   components: { MenuEntry },
-  data () {
-    return {
-      "flag": "default"
-    }
-  },
   computed: {
     ...mapGetters('user', {
       roles: 'roles',
-      isAuthenticated: 'isAuthenticated',
       userError: 'getErrors'
     }),
     ...mapGetters('navigationEntries', {
-      default: 'default',
-      global: 'global',
-      navDefaultError: 'getDefaultErrors',
-      navGlobalError: 'getGlobalErrors'
+      entries: 'get',
+      navErrors: 'getErrors'
     }),
   },
   watch: {
@@ -73,24 +65,11 @@ export default {
       userInit: 'init'
     }),
     ...mapActions('navigationEntries', {
-      navInit: 'init'
+      navInit: 'init',
+      setFlag: 'flagIt'
     }),
-    setFlag() {
-      if (this.isAuthenticated) {
-        this.flag = "global"
-      } else {
-        this.flag = "default"
-      }
-    },
-    entries() {
-      let entries = this.default
-      if (this.flag === "global") {
-        entries = this.global
-      }
-      return entries.filter((e) => Object.prototype.hasOwnProperty.call(e,'hasAccess') && e.hasAccess)
-    },
     errors() {
-      return this.userError.concat(this.navError)
+      return this.userError.concat(this.navErrors)
     }
   },
   mounted () {

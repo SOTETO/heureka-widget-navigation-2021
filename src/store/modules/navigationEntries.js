@@ -1,6 +1,7 @@
 import DispenserEndpoints from '@/backend-endpoints/dispenser'
 
 const state = {
+    flag: "default",
     default: [],
     global: [],
     defaultError: [],
@@ -8,6 +9,13 @@ const state = {
 }
 
 const getters = {
+    get: (state) => {
+        let entries = state.default
+        if (state.flag === "global") {
+            entries = state.global
+        }
+        return entries.filter((e) => Object.prototype.hasOwnProperty.call(e,'hasAccess') && e.hasAccess)
+    },
     default: (state) => {
         return state.default
     },
@@ -15,7 +23,11 @@ const getters = {
         return state.global
     },
     getErrors: (state) => {
-        return state.defaultError.concat(state.globalError)
+        let errors = state.defaultError
+        if (state.flag === "global") {
+            errors = state.globalError
+        }
+        return errors
     },
     hasDefaultError: (state) => {
         return state.defaultError.length !== 0
@@ -88,10 +100,20 @@ const actions = {
         let global = utils.calcAccess(store, store.state.global)
         store.commit({ "type": 'setDefault', "entries": defaults })
         store.commit({ "type": 'setGlobal', "entries": global })
+    },
+    flagIt (store) {
+        if (store.rootGetters['user/isAuthenticated']) {
+            store.commit({ "type": 'setFlag', "flag": "global" })
+        } else {
+            store.commit({ "type": 'setFlag', "flag": "default" })
+        }
     }
 }
 
 const mutations = {
+    setFlag(state, commit) {
+        state.flag = commit.flag
+    },
     setDefault(state, commit) {
         state.default = commit.entries
     },
