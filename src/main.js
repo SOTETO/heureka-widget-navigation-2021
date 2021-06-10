@@ -5,6 +5,7 @@ import TopNavigation from './components/TopNavigation';
 import BottomNavigation from './components/BottomNavigation';
 import en from '@/lang/en.json';
 import de from '@/lang/de.json';
+import store from './store'
 
 Vue.use(VueI18n)
 
@@ -28,6 +29,7 @@ Vue.use(TopNavigation, { 'i18n': i18n })
 
 new Vue({
   i18n,
+  store,
   components: { TopNavigation, BottomNavigation },
   mounted() {
     /**

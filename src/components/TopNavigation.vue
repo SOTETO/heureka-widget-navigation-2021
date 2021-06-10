@@ -18,7 +18,7 @@
       </div>
       <div class="navbar-collapse collapse" id="navbar-main">
         <ul class="nav navbar-nav navbar-right">
-          <MenuEntry v-for="entry in getEntries()" :key="entry.id" :entry="entry" type="button" :layer="0" :roles="currentUserRoles" />
+          <MenuEntry v-for="entry in entries()" :key="entry.id" :entry="entry" type="button" :layer="0" :roles="roles" />
         </ul>
         <ul v-if="errors && errors.length">
           <li v-for="error of errors" :key="error.id">
@@ -31,7 +31,7 @@
 </template>
 
 <script>
-import axios from 'axios'
+import { mapGetters, mapActions } from 'vuex'
 import MenuEntry from './MenuEntry'
 
 export default {
@@ -39,91 +39,62 @@ export default {
   components: { MenuEntry },
   data () {
     return {
-      'entrys': [],
-      'errors': [],
-      'location': '',
-      'currentUserRoles': [],
-      'locale': navigator.language
+      "flag": "default"
     }
+  },
+  computed: {
+    ...mapGetters('user', {
+      roles: 'roles',
+      isAuthenticated: 'isAuthenticated',
+      userError: 'getErrors'
+    }),
+    ...mapGetters('navigationEntries', {
+      default: 'default',
+      global: 'global',
+      navDefaultError: 'getDefaultErrors',
+      navGlobalError: 'getGlobalErrors'
+    }),
   },
   watch: {
     $route () {
-      this.getNavigation()
+      this.setFlag()
     }
   },
   created () {
     var that = this;
     window.onhashchange = function() {
-      that.getNavigation()
+      that.setFlag()
     }
+    this.userInit(this.setFlag)
+    this.navInit()
   },
   methods: {
-    addChild: function () {
-      this.entrys.entrys.push({
-        name: 'new stuff'
-      })
-    },
-    getRoles: function(user) {
-      var roles = user.roles.map((role) => role.role)
-      this.currentUserRoles = roles.concat(
-          user.profiles.reduce((supporterRoles, profile) => supporterRoles.concat(profile.supporter.roles), [])
-      )
-    },
-    getNavigation: function () {
-      axios.get('/drops/webapp/identity').then(response => { // /dispenser/identity
-        if (response.status === 200) {
-          this.getRoles(response.data.additional_information)
-          axios.get('/dispenser/navigation/global').then(r => {
-            this.entrys = r.data
-            this.entrys = this.calcAccess(this.entrys)
-          }).catch(e => {
-            this.errors.push(e)
-          })
-        }
-      }).catch(error => {
-        switch (error.response.status) {
-          case 401:
-            axios.get('/dispenser/navigation/default').then(response => {
-              this.entrys = response.data
-              this.entrys = this.calcAccess(this.entrys)
-            }).catch(e => {
-              this.errors.push(e)
-            })
-        }
-      })
-    },
-    getEntries: function () {
-      return this.entrys.filter((e) => Object.prototype.hasOwnProperty.call(e,"hasAccess") && e.hasAccess)
-    },
-    hasAccess: function (entry) {
-      function compare(roleUser, roleRoute) {
-        function checkCrewName () {
-          return (!Object.prototype.hasOwnProperty.call(roleRoute,"crewNames") || (Object.prototype.hasOwnProperty.call(roleUser,"crew") && roleRoute.crewNames.some((crewName) => crewName === roleUser.crew.name)))
-        }
-        function checkPillar () {
-          return (!Object.prototype.hasOwnProperty.call(roleRoute,"pillars") || (Object.prototype.hasOwnProperty.call(roleUser,"pillar") && roleRoute.pillars.some((pillar) => pillar === roleUser.pillar.pillar)))
-        }
-        return ((typeof roleUser === "string") && roleUser === roleRoute.role && !Object.prototype.hasOwnProperty.call(roleRoute,"crewNames") && !Object.prototype.hasOwnProperty.call(roleRoute,"pillars")) ||
-            ((typeof roleUser === "object") && roleUser.name === roleRoute.role && checkCrewName() && checkPillar())
+    ...mapActions('user', {
+      userInit: 'init'
+    }),
+    ...mapActions('navigationEntries', {
+      navInit: 'init'
+    }),
+    setFlag() {
+      if (this.isAuthenticated) {
+        this.flag = "global"
+      } else {
+        this.flag = "default"
       }
-      return !Object.prototype.hasOwnProperty.call(entry,'permission') || entry.permission.reduce(
-          (access, roleRoute) => access || this.currentUserRoles.reduce((roleAccess, roleUser) => roleAccess || compare(roleUser, roleRoute), false),
-          false
-      )
     },
-    calcAccess: function (entries) {
-      var that = this
-      return entries.map((entry) => {
-        entry['hasAccess'] = that.hasAccess(entry)
-        if(Object.prototype.hasOwnProperty.call(entry,"entrys")) {
-          entry.entrys = that.calcAccess(entry.entrys)
-        }
-        return entry
-      })
+    entries() {
+      let entries = this.default
+      if (this.flag === "global") {
+        entries = this.global
+      }
+      return entries.filter((e) => Object.prototype.hasOwnProperty.call(e,'hasAccess') && e.hasAccess)
+    },
+    errors() {
+      return this.userError.concat(this.navError)
     }
   },
   mounted () {
-    this.getNavigation()
+    this.setFlag()
   }
 }
 </script>
