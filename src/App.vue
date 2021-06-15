@@ -1,6 +1,6 @@
 <template>
   <div id="app">
-    <TopNavigation />
+    <TopNavigation :local-entries="testLocalEntries" local-rule="concat" />
     <div id="content">
       Hello World!
     </div>
@@ -17,6 +17,20 @@ export default {
   components: {
     TopNavigation,
     BottomNavigation
+  },
+  computed: {
+    testLocalEntries() {
+      return [{
+        'label': {
+          'de_DE': "neu",
+          'en_EN': "new"
+        },
+        'url': '/new',
+        'permission': [{
+          'role': 'supporter'
+        }]
+      }]
+    }
   }
 }
 </script>

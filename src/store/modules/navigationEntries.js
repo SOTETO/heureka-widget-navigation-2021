@@ -2,6 +2,8 @@ import DispenserEndpoints from '@/backend-endpoints/dispenser'
 
 const state = {
     flag: "default",
+    localRule: "concat", // possible values: "concat" or "replace"
+    local: [],
     default: [],
     global: [],
     defaultError: [],
@@ -10,9 +12,23 @@ const state = {
 
 const getters = {
     get: (state) => {
-        let entries = state.default
+        function applyLocalRule (items) {
+            let result = items
+            if(Array.isArray(state.local) && state.local.length !== 0) {
+                switch (state.localRule) {
+                    case "concat":
+                        result = state.local.concat(items)
+                        break
+                    case "replace":
+                        result = state.local
+                        break
+                }
+            }
+            return result
+        }
+        let entries = applyLocalRule(state.default) // TODO: REPLACE CONCAT BY USER DEFINED RULES
         if (state.flag === "global") {
-            entries = state.global
+            entries = applyLocalRule(state.global) // TODO: REPLACE CONCAT BY USER DEFINED RULES
         }
         return entries.filter((e) => Object.prototype.hasOwnProperty.call(e,'hasAccess') && e.hasAccess)
     },
@@ -64,17 +80,19 @@ const utils = {
     calcAccess (store, entries) {
         let that = this
         return entries.map((entry) => {
-            entry['hasAccess'] = that.hasAccess(store, entry)
-            if(Object.prototype.hasOwnProperty.call(entry,"entries")) {
-                entry.entries = that.calcAccess(store, entry.entries)
+            let entryCopy = {}
+            Object.assign(entryCopy, entry)
+            entryCopy['hasAccess'] = that.hasAccess(store, entryCopy)
+            if(Object.prototype.hasOwnProperty.call(entryCopy,"entries")) {
+                entryCopy.entries = that.calcAccess(store, entryCopy.entries)
             }
-            return entry
+            return entryCopy
         })
     }
 }
 
 const actions = {
-    init (store) {
+    init (store, local) {
         let ajax = new DispenserEndpoints(store)
         let successHandlerDefault = (response) => {
             let entries = utils.calcAccess(store, response.data)
@@ -94,12 +112,24 @@ const actions = {
         }
         ajax.getDefault(successHandlerDefault, errorDefaultHandler)
         ajax.getGlobal(successHandlerGlobal, errorGlobalHandler)
+        let localEntries = utils.calcAccess(store, local.entries)
+        let data = {
+            "entries": localEntries,
+            "rule": local.rule
+        }
+        store.commit({ "type": 'setLocal', "data": data })
     },
     updateAccessRights (store) {
         let defaults = utils.calcAccess(store, store.state.default)
         let global = utils.calcAccess(store, store.state.global)
+        let localEntries = utils.calcAccess(store, store.state.local)
+        let data = {
+            "entries": localEntries,
+            "rule": store.state.localRule
+        }
         store.commit({ "type": 'setDefault', "entries": defaults })
         store.commit({ "type": 'setGlobal', "entries": global })
+        store.commit({ "type": 'setLocal', "data": data })
     },
     flagIt (store) {
         if (store.rootGetters['user/isAuthenticated']) {
@@ -113,6 +143,11 @@ const actions = {
 const mutations = {
     setFlag(state, commit) {
         state.flag = commit.flag
+    },
+    setLocal(state, commit) {
+        state.local = commit.data.entries
+        if(['concat', 'replace'].indexOf(commit.data.rule) !== -1)
+            state.localRule = commit.data.rule
     },
     setDefault(state, commit) {
         state.default = commit.entries

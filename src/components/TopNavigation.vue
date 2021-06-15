@@ -37,6 +37,26 @@ import MenuEntry from './MenuEntry'
 export default {
   name: 'TopNavigation',
   components: { MenuEntry },
+  props: {
+    localEntries: {
+      type: Array,
+      required: false,
+      default: function () {
+        return []
+      }
+    },
+    localRule: {
+      type: String,
+      required: false,
+      default: function () {
+        return 'concat'
+      },
+      validator: function (value) {
+        // The value must match one of these strings
+        return ['concat', 'replace'].indexOf(value) !== -1
+      }
+    }
+  },
   computed: {
     ...mapGetters('user', {
       roles: 'roles',
@@ -58,7 +78,11 @@ export default {
       that.setFlag()
     }
     this.userInit(this.setFlag)
-    this.navInit()
+    let localNav = {
+      "entries": this.localEntries,
+      "rule": this.localRule
+    }
+    this.navInit(localNav)
   },
   methods: {
     ...mapActions('user', {

@@ -18,9 +18,13 @@ of the page.
 
 You can use it that way:
 ```xml
-<WidgetTopNavigation />
+<WidgetTopNavigation :local-entries="localEntries" local-rule="concat" />
 ```
-*There are no parameters for this widget*<br />
+| Parameter | Type | Optional | Default | Description |
+|-----------|------|----------|---------|-------------|
+| `local-entries` | `[{'label': { 'de_DE': "neu", 'en_EN': "new" }, 'url': '/new', 'permission': [{ 'role': 'supporter' }]}]` | optional | `[]` | You can pass an array of local navigation entries. |
+| `local-rule` | `'concat'` or `'replace'` | optional | `'concat'` | Defines if the local entries are concatinated (`'concat'`) or if the local entries replace the global navigation (`'replace'`). |
+<br />
 *There are no slots for this widget*
 
 > Attention! Please consider the additional CSS style needed to create the default Pool² layout (see [Usage](#usage)).
