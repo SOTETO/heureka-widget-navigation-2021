@@ -1,14 +1,23 @@
 {
   "name": "heureka-widget-navigation-2021",
   "version": "0.2.16",
-  "private": true,
   "description": "Implements a widget showing the menu of the Pool², an instance of the Heureka! architecture.",
   "author": "Johann Sell <sell@informatik.hu-berlin.de>",
   "scripts": {
     "serve": "vue-cli-service serve",
     "build": "vue-cli-service build",
-    "lint": "vue-cli-service lint"
+    "lib": "vue-cli-service build --target lib --name heureka-widget-navigation-2021 src/lib.js",
+    "lint": "vue-cli-service lint",
+    "prepublish": "npm run lib"
   },
+  "main": "./dist/heureka-widget-navigation-2021.common.js",
+  "files": [
+    "dist/*",
+    "src/*",
+    "public/*",
+    "*.json",
+    "*.js"
+  ],
   "dependencies": {
     "axios": "^0.18.0",
     "core-js": "^3.6.5",
@@ -53,5 +62,9 @@
   "bugs": {
     "url": "https://github.com/SOTETO/heureka-widget-navigation-2021/issues"
   },
-  "homepage": "https://github.com/SOTETO/heureka-widget-navigation-2021#readme"
+  "homepage": "https://github.com/SOTETO/heureka-widget-navigation-2021#readme",
+  "license": {
+    "type": "AGPL-3.0-or-later",
+    "url": "https://www.gnu.org/licenses/agpl.txt"
+  }
 }

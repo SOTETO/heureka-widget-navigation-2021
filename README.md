@@ -1,6 +1,6 @@
 # heureka-widget-navigation-2021
 
-[![npm](https://img.shields.io/npm/v/heureka-widget-navigation.svg)](https://www.npmjs.com/package/heureka-widget-navigation) [![vue2](https://img.shields.io/badge/vue-2.x-brightgreen.svg)](https://vuejs.org/)
+[![npm](https://img.shields.io/npm/v/heureka-widget-navigation-2021.svg)](https://www.npmjs.com/package/heureka-widget-navigation-2021) [![vue2](https://img.shields.io/badge/vue-2.x-brightgreen.svg)](https://vuejs.org/)
 
 > Implements a widget showing the menu of the Pool², an instance of the Heureka! architecture.
 
@@ -46,7 +46,7 @@ You can use it that way:
 ## Installation
 
 ```bash
-npm install --save vca-widget-navigation
+npm install --save heureka-widget-navigation-2021
 ```
 
 ## Usage
@@ -55,7 +55,7 @@ npm install --save vca-widget-navigation
 
 Add the following to the component that uses the navigation:
 ```js
-import { WidgetTopNavigation, WidgetBottomNavigation } from 'vca-widget-navigation';
+import { WidgetTopNavigation, WidgetBottomNavigation } from 'heureka-widget-navigation-2021';
 export default {
   name: 'App', // use the name of your component
   components: { WidgetTopNavigation, WidgetBottomNavigation }
@@ -97,12 +97,12 @@ middle of menu and footer) has to grow:
 ```html
 <!-- Include after Vue -->
 <!-- Local files -->
-<link rel="stylesheet" href="widget-user/dist/widget-user.css"></link>
+<link rel="stylesheet" href="heureka-widget-navigation-2021/dist/heureka-widget-navigation-2021.css"></link>
 <script src="vca-widget-user/dist/widget-user.js"></script>
 
 <!-- From CDN -->
-<link rel="stylesheet" href="https://unpkg.com/vca-widget-user/dist/widget-user.css"></link>
-<script src="https://unpkg.com/vca-widget-user"></script>
+<link rel="stylesheet" href="https://unpkg.com/heureka-widget-navigation-2021/dist/heureka-widget-navigation-2021.css"></link>
+<script src="https://unpkg.com/heureka-widget-navigation-2021"></script>
 ```
 
 #### Existing internationalization
@@ -113,7 +113,7 @@ yours. You can do this in your `main.js` before you instantiate your Vue App.
 import Vue from 'vue';
 ...
 import VueI18n from 'vue-i18n';
-import { WidgetTopNavigation, WidgetBottomNavigation } from 'vca-widget-navigation' 
+import { WidgetTopNavigation, WidgetBottomNavigation } from 'heureka-widget-navigation-2021' 
 
 Vue.use(VueI18n);
 
