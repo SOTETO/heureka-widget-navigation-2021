@@ -3,6 +3,8 @@ import WidgetBottomNavigation from './components/BottomNavigation.vue'
 import VueI18n from 'vue-i18n'
 import en from './lang/en.json'
 import de from './lang/de.json'
+import navigationEntries from "@/store/modules/navigationEntries";
+import user from "@/store/modules/user";
 
 function getLang (Vue, options) {
     function exists (options) {
@@ -29,11 +31,17 @@ function getLang (Vue, options) {
 
 WidgetTopNavigation.install = function (Vue, options) {
     Vue = getLang(Vue, options)
+    // Merge the stores by iterating through the attributes of "modules" of both stores and combining them.
+    Vue.store._modules.register("heureka_widget_navigation_user", user)
+    Vue.store._modules.register("heureka_widget_navigation_entries", navigationEntries)
     Vue.component('widget-top-navigation', WidgetTopNavigation)
 }
 
 WidgetBottomNavigation.install = function (Vue, options) {
     Vue = getLang(Vue, options)
+    // Merge the stores by iterating through the attributes of "modules" of both stores and combining them.
+    Vue.store._modules.register("heureka_widget_navigation_user", user)
+    Vue.store._modules.register("heureka_widget_navigation_entries", navigationEntries)
     Vue.component('widget-bottom-navigation', WidgetBottomNavigation)
 }
 

@@ -58,11 +58,11 @@ export default {
     }
   },
   computed: {
-    ...mapGetters('user', {
+    ...mapGetters('heureka_widget_navigation_user', {
       roles: 'roles',
       userError: 'getErrors'
     }),
-    ...mapGetters('navigationEntries', {
+    ...mapGetters('heureka_widget_navigation_entries', {
       entries: 'get',
       navErrors: 'getErrors'
     }),
@@ -85,10 +85,10 @@ export default {
     this.navInit(localNav)
   },
   methods: {
-    ...mapActions('user', {
+    ...mapActions('heureka_widget_navigation_user', {
       userInit: 'init'
     }),
-    ...mapActions('navigationEntries', {
+    ...mapActions('heureka_widget_navigation_entries', {
       navInit: 'init',
       setFlag: 'flagIt'
     }),

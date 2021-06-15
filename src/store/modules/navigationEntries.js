@@ -26,9 +26,9 @@ const getters = {
             }
             return result
         }
-        let entries = applyLocalRule(state.default) // TODO: REPLACE CONCAT BY USER DEFINED RULES
+        let entries = applyLocalRule(state.default)
         if (state.flag === "global") {
-            entries = applyLocalRule(state.global) // TODO: REPLACE CONCAT BY USER DEFINED RULES
+            entries = applyLocalRule(state.global)
         }
         return entries.filter((e) => Object.prototype.hasOwnProperty.call(e,'hasAccess') && e.hasAccess)
     },
@@ -73,7 +73,7 @@ const utils = {
                 ((typeof roleUser === "object") && roleUser.name === roleRoute.role && checkCrewName() && checkPillar())
         }
         return !Object.prototype.hasOwnProperty.call(entry,'permission') || entry.permission.reduce(
-            (access, roleRoute) => access || store.rootGetters['user/roles'].reduce((roleAccess, roleUser) => roleAccess || compare(roleUser, roleRoute), false),
+            (access, roleRoute) => access || (Array.isArray(store.rootGetters['heureka_widget_navigation_user/roles']) && store.rootGetters['heureka_widget_navigation_user/roles'].reduce((roleAccess, roleUser) => roleAccess || compare(roleUser, roleRoute), false)),
             false
         )
     },
@@ -132,7 +132,7 @@ const actions = {
         store.commit({ "type": 'setLocal', "data": data })
     },
     flagIt (store) {
-        if (store.rootGetters['user/isAuthenticated']) {
+        if (store.rootGetters['heureka_widget_navigation_user/isAuthenticated']) {
             store.commit({ "type": 'setFlag', "flag": "global" })
         } else {
             store.commit({ "type": 'setFlag', "flag": "default" })

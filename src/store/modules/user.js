@@ -93,19 +93,19 @@ const actions = {
         store.commit('API_USER_PENDING')
         let successHandler = function (user) {
             store.commit('API_USER_SUCCESS', user)
-            store.dispatch('navigationEntries/updateAccessRights', null, { root: true })
+            store.dispatch('heureka_widget_navigation_entries/updateAccessRights', null, { root: true })
             followUpHandler()
         }
         let unauthorizedHandler = function (error) {
             store.commit('API_USER_LOGOUT', error)
-            //store.actions.navigationEntries.updateAccessRights(store.navigatenEntries)
-            store.dispatch('navigationEntries/updateAccessRights', null, { root: true })
+            //store.actions.heureka_widget_navigation_entries.updateAccessRights(store.navigatenEntries)
+            store.dispatch('heureka_widget_navigation_entries/updateAccessRights', null, { root: true })
             followUpHandler()
         }
         let errorHandler = function (error) {
             store.commit('API_USER_FAILURE', error)
-            //store.actions.navigationEntries.updateAccessRights(store.navigatenEntries)
-            store.dispatch('navigationEntries/updateAccessRights', null, { root: true })
+            //store.actions.heureka_widget_navigation_entries.updateAccessRights(store.navigatenEntries)
+            store.dispatch('heureka_widget_navigation_entries/updateAccessRights', null, { root: true })
             followUpHandler()
         }
         ajax.get(successHandler, unauthorizedHandler, errorHandler)
@@ -115,11 +115,11 @@ const actions = {
     },
     success (store, user) {
         store.commit('API_USER_SUCCESS', user)
-        store.actions.navigationEntries.updateAccessRights(store.navigatenEntries)
+        store.actions.heureka_widget_navigation_entries.updateAccessRights(store.navigatenEntries)
     },
     error (store, error) {
         store.commit('API_USER_FAILURE', error)
-        store.actions.navigationEntries.updateAccessRights(store.navigatenEntries)
+        store.actions.heureka_widget_navigation_entries.updateAccessRights(store.navigatenEntries)
     },
     /**
      * Has to be called by all other AJAX requests, if they receive an [401 status code](https://tools.ietf.org/html/rfc7235#section-3.1).
@@ -133,7 +133,7 @@ const actions = {
      */
     logout(store, error) {
         store.commit('API_USER_LOGOUT', error)
-        store.actions.navigationEntries.updateAccessRights(store.navigatenEntries)
+        store.actions.heureka_widget_navigation_entries.updateAccessRights(store.navigatenEntries)
     }
 }
 

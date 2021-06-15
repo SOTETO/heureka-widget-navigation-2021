@@ -9,8 +9,8 @@ const debug = process.env.NODE_ENV !== 'production'
 
 export default new Vuex.Store({
     modules: {
-        navigationEntries: navigationEntries,
-        user: user
+        'heureka_widget_navigation_entries': navigationEntries,
+        'heureka_widget_navigation_user': user
     },
     strict: debug
 })
