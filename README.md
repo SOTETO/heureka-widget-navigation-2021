@@ -56,6 +56,8 @@ npm install --save heureka-widget-navigation-2021
 Add the following to the component that uses the navigation:
 ```js
 import { WidgetTopNavigation, WidgetBottomNavigation } from 'heureka-widget-navigation-2021';
+import 'heureka-widget-navigation-2021/dist/heureka-widget-navigation-2021.css'
+
 export default {
   name: 'App', // use the name of your component
   components: { WidgetTopNavigation, WidgetBottomNavigation }
@@ -98,7 +100,7 @@ middle of menu and footer) has to grow:
 <!-- Include after Vue -->
 <!-- Local files -->
 <link rel="stylesheet" href="heureka-widget-navigation-2021/dist/heureka-widget-navigation-2021.css"></link>
-<script src="vca-widget-user/dist/widget-user.js"></script>
+<script src="heureka-widget-navigation-2021/dist/heureka-widget-navigation-2021.common.js"></script>
 
 <!-- From CDN -->
 <link rel="stylesheet" href="https://unpkg.com/heureka-widget-navigation-2021/dist/heureka-widget-navigation-2021.css"></link>
@@ -145,6 +147,23 @@ Afterwards, you don't have to use `Vue.use(WidgetTopNavigation)` or `Vue.use(Wid
 ```
 npm install
 ```
+
+### Testing
+Testing requires to publish the build artifacts. [Verdaccio](https://verdaccio.org/) can be used to setup a local npm registry. Afterwards, you just have to call
+```shell
+verdaccio
+```
+on your console and the local registry starts. Add
+```json
+"publishConfig": {
+  "registry": "http://localhost:4873"
+}
+```
+to the `package.json` and `npm publish` will use your local registry. In the target project (e.g. [Arise](https://github.com/SOTETO/arise)), you can use
+```shell
+npm install --save --registry http://localhost:4873 heureka-widget-navigation-2021
+```
+to install the package from your local registry.
 
 ### Compiles and hot-reloads for development
 ```

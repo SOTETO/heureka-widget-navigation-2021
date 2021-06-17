@@ -25,10 +25,7 @@ export default {
           'de_DE': "neu",
           'en_EN': "new"
         },
-        'url': '/new',
-        'permission': [{
-          'role': 'supporter'
-        }]
+        'url': '/new'
       }]
     }
   }

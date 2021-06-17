@@ -31,10 +31,12 @@
 </template>
 
 <script>
+import store from '@/store'
 import { mapGetters, mapActions } from 'vuex'
 import MenuEntry from './MenuEntry'
 
 export default {
+  store,
   name: 'TopNavigation',
   components: { MenuEntry },
   props: {
