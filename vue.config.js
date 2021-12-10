@@ -1,7 +1,7 @@
 module.exports = {
     publicPath: process.env.NODE_ENV === 'production'
         ? '/'
-        : '/new/',
+        : '/heureka-widget-navigation/',
     chainWebpack: config => {
         const svgRule = config.module.rule('svg')
 
