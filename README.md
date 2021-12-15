@@ -56,7 +56,7 @@ npm install --save heureka-widget-navigation-2021
 Add the following to the component that uses the navigation:
 ```js
 import { WidgetTopNavigation, WidgetBottomNavigation } from 'heureka-widget-navigation-2021';
-import 'heureka-widget-navigation-2021/dist/heureka-widget-navigation-2021.css'
+import 'heureka-widget-navigation-2021/dist/heureka_widget_navigation_2021.css'
 
 export default {
   name: 'App', // use the name of your component
@@ -99,12 +99,54 @@ middle of menu and footer) has to grow:
 ```html
 <!-- Include after Vue -->
 <!-- Local files -->
-<link rel="stylesheet" href="heureka-widget-navigation-2021/dist/heureka-widget-navigation-2021.css"></link>
-<script src="heureka-widget-navigation-2021/dist/heureka-widget-navigation-2021.common.js"></script>
+<link rel="stylesheet" href="heureka-widget-navigation-2021/dist/heureka_widget_navigation_2021.css"></link>
+<script src="heureka-widget-navigation-2021/dist/heureka_widget_navigation_2021.umd.js"></script>
 
 <!-- From CDN -->
-<link rel="stylesheet" href="https://unpkg.com/heureka-widget-navigation-2021/dist/heureka-widget-navigation-2021.css"></link>
-<script src="https://unpkg.com/heureka-widget-navigation-2021"></script>
+<link rel="stylesheet" href="https://unpkg.com/heureka-widget-navigation-2021/dist/heureka_widget_navigation_2021.css"></link>
+<script src="https://unpkg.com/heureka-widget-navigation-2021/dist/heureka_widget_navigation_2021.umd.js"></script>
+
+<body>
+    <div id="app">
+        ...
+        <div id="heureka-header"></div>
+        <div id="content">
+            ...
+        </div>
+        <div id="heureka-footer"></div>
+        ...
+    </div>
+    ...
+    <!-- HEUREKA! WIDGET USAGE -->
+    <script type="module">
+        var WidgetTopNavigation = window.heureka_widget_navigation_2021.WidgetTopNavigation
+        var WidgetBottomNavigation = window.heureka_widget_navigation_2021.WidgetBottomNavigation
+        new Vue({
+            render: h => h(WidgetTopNavigation),
+        }).$mount('#heureka-header')
+
+        new Vue({
+            render: h => h(WidgetBottomNavigation),
+        }).$mount('#heureka-footer')
+    </script>
+</body>
+```
+
+Attention! This is required to have the menu at the top and the footer at the bottom of the page. The conatiner of menu,
+footer and content has to displayed flexible and its content should be a column. The container of the content (in the
+middle of menu and footer) has to grow:
+```css
+  #app {
+    flex: 1;
+    display: flex;
+    flex-direction: column;
+  }
+  #content {
+    flex-grow: 1;
+    flex-shrink: 0;
+    display: flex;
+    overflow: auto;
+  }
 ```
 
 #### Existing internationalization
@@ -149,6 +191,9 @@ npm install
 ```
 
 ### Testing
+You can start the test application for the widget by using the port `8081` and the base URL path `/heureka-widget-navigation/`.
+Afterwards, the test system is accessible by starting the `INFRA` environment of the [Heureka!-CLI](https://github.com/SOTETO/heureka) using `http://localhost/heureka-widget-navigation/`.
+
 Testing requires to publish the build artifacts. [Verdaccio](https://verdaccio.org/) can be used to setup a local npm registry. Afterwards, you just have to call
 ```shell
 verdaccio
