@@ -1,6 +1,6 @@
 {
   "name": "heureka-widget-navigation-2021",
-  "version": "0.2.19",
+  "version": "0.2.20",
   "description": "Implements a widget showing the menu of the Pool², an instance of the Heureka! architecture.",
   "author": "Johann Sell <sell@informatik.hu-berlin.de>",
   "scripts": {
@@ -10,7 +10,7 @@
     "lint": "vue-cli-service lint",
     "prepublish": "npm run lib"
   },
-  "main": "./dist/heureka-widget-navigation-2021.common.js",
+  "main": "./dist/heureka_widget_navigation_2021.common.js",
   "files": [
     "dist/*",
     "src/*",
